@@ -13,8 +13,9 @@ class Post extends Model
 
     public static function all($columns = ['*'])
     {
-        // Your existing logic
-        return File::files(resource_path("posts/"));
+        $files = File::files(resource_path("posts/"));
+
+        return array_map(fn($file) => file_get_contents($file), $files);
     }
 
     public static function find($slug)
