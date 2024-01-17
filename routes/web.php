@@ -8,13 +8,12 @@ Route::get('/', function () {
 
 Route::get('posts/{post}', function ($slug) {
 
-    if (!file_exists($path = __dir__ . "/../resources/posts/{$slug}.html")) {
-        return redirect('/');
-    }
+    // Find a post by its slug and pass it to a vew called "post"
+    $post = \App\Models\Post::find($slug);
 
-    $post = cache()->remember("posts.{$slug}", 1200, fn() => file_get_contents($path));
-
-    return view('post', ["post" => $post]);
+    return view('post', [
+        'post' => $post
+    ]);
 
 })->where('post', '[A-z_\-]+');
 
