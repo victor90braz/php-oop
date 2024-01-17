@@ -5,10 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\File;
 
 class Post extends Model
 {
     use HasFactory;
+
+    public static function all($columns = ['*'])
+    {
+        // Your existing logic
+        return File::files(resource_path("posts/"));
+    }
 
     public static function find($slug)
     {
