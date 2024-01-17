@@ -8,11 +8,8 @@ Route::get('/', function () {
 
 Route::get('posts/{post}', function ($slug) {
 
-    // Find a post by its slug and pass it to a vew called "post"
-    $post = \App\Models\Post::find($slug);
-
     return view('post', [
-        'post' => $post
+        'post' => \App\Models\Post::find($slug)
     ]);
 
 })->where('post', '[A-z_\-]+');
