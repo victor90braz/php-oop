@@ -3,30 +3,21 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts');
 });
 
-Route::get('/vatservice/{price}/{countryCode}', function ($price, $countryCode) {
+Route::get('posts/{post}', function ($slug) {
 
-    // Get URL parameters
-    $urlParameters = [
-        'price' => $price,
-        'countryCode' => $countryCode,
-    ];
+    $path = __dir__ . "/../resources/posts/{$slug}.html";
 
-    // Get query parameters
-    $queryParameters = request()->query();
+    if (! file_exists( $path)) {
+        return redirect('/');
+    }
 
-    // Combine URL and query parameters
-    $allParameters = array_merge($urlParameters, $queryParameters);
+    $post = file_get_contents($path);
 
-    // Dump all parameters
-    //var_dump($allParameters);
-
-    $apiUrl = 'https://vat.abstractapi.com/v1/calculate';
-    $apiKey = 'c4327f82301a41cc917e7bf2791abb69';
-
-    $vatService = new \App\Services\VATService($apiUrl, $apiKey, $countryCode);
-
-    return $vatService->calculateVatAmount($price);
+    return view('post', [
+        "post" => $post
+    ] );
 });
+
