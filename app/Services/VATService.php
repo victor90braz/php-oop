@@ -8,11 +8,12 @@ class VATService
 {
     /**
      * @param float $price
+     * @param string $countryCode
      * @return float
      */
-    public function calculateVatAmount(float $price): float
+    public function calculateVatAmount(float $price, string $countryCode): float
     {
-        $response = $this->callExternalAPI($price);
+        $response = $this->callExternalAPI($price, $countryCode);
         return $response->json('vat_amount');
     }
 
@@ -20,11 +21,10 @@ class VATService
      * @param float $price
      * @return \Illuminate\Http\Client\Response
      */
-    protected function callExternalAPI(float $price)
+    protected function callExternalAPI(float $price, string $countryCode)
     {
         $apiUrl = 'https://vat.abstractapi.com/v1/calculate';
         $apiKey = '2d1cf30f3e364b17ac99d68a4011aea2';
-        $countryCode = 'DE';
 
         return Http::get($apiUrl, [
             'api_key' => $apiKey,
