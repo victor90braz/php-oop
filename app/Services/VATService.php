@@ -22,7 +22,6 @@ class VATService
      */
     protected function callExternalAPI(float $price)
     {
-
         $apiUrl = 'https://vat.abstractapi.com/v1/calculate';
         $apiKey = '2d1cf30f3e364b17ac99d68a4011aea2';
         $countryCode = 'DE';
@@ -32,7 +31,6 @@ class VATService
             'amount' => $price,
             'country_code' => $countryCode
         ]);
-
     }
 
 }
