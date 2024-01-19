@@ -3,17 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-
-    return view('posts', [
-        'posts' => \App\Models\Post::all()
-    ]);
+    return view('welcome');
 });
 
-Route::get('posts/{post}', function ($slug) {
-
-    return view('post', [
-        'post' => \App\Models\Post::find($slug)
-    ]);
-
-})->where('post', '[A-z_\-]+');
+Route::get('/vatservice/', function () {
+    return (new \App\Services\VATService())->calculateVatAmount(request('amount'));
+});
 
