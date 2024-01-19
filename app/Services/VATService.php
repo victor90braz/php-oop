@@ -19,6 +19,7 @@ class VATService
 
     /**
      * @param float $price
+     * @param string $countryCode
      * @return \Illuminate\Http\Client\Response
      */
     protected function callExternalAPI(float $price, string $countryCode)
@@ -32,5 +33,4 @@ class VATService
             'country_code' => $countryCode
         ]);
     }
-
 }
