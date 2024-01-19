@@ -12,7 +12,7 @@ class VATServiceController extends Controller
      */
     public function getVatAmount(Request $request)
     {
-        return (new \App\Services\VATService())->calculateVatAmount($request->input('amount'));
+        return (new \App\Services\VATService())->calculateVatAmount($request->query('amount'));
     }
 }
 
