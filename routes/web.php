@@ -6,7 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/vatservice/', function () {
-    return (new \App\Services\VATService())->calculateVatAmount(request('amount'));
-});
+Route::get('/vatservice/', [\App\Http\Controllers\VATServiceController::class, 'getVatAmount']);
 
